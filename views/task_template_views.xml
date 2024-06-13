@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="task_template_view_form" model="ir.ui.view">
+        <field name="name">task.template.form</field>
+        <field name="model">task.template</field>
+        <field name="arch" type="xml">
+            <form string="task template">
+                 <header>
+                    <button name="action_create_task" class="oe_highlight" string="Create Task"
+                            type="object" help="Click here to Create Task"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="milestone_id"/>
+                            <field name="assignee_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="task_template_view_tree" model="ir.ui.view">
+        <field name="name">task.template.tree</field>
+        <field name="model">task.template</field>
+        <field name="arch" type="xml">
+            <tree string="task template" create="1">
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+    <record id="task_template_action" model="ir.actions.act_window">
+        <field name="name">Task Template</field>
+        <field name="res_model">task.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="project_template_task"
+              name="Task Templates"
+              parent="project_template"
+              action="task_template_action"
+              sequence="2"/>
+</odoo>
